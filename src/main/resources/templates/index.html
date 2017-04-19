@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <title>Demo Project</title>
 </head>
 <body>
-<p th:text="'Hello, World'">Hello World.</p>
+<p th:text="'Hello '+${user.firstname}+'.'">Hello World.</p>
 </body>
 </html>
