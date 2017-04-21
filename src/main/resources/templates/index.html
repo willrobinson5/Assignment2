@@ -2,8 +2,37 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Demo Project</title>
+    <a href="/user/register">Register</a>
 </head>
 <body>
-<p th:text="'Hello '+${user.firstname}+'.'">Hello World.</p>
+
+<table border="1px">
+    <tr>
+        <th>First Name</th>
+        <th>Surname</th>
+        <th>Password</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.firstname}">Will</td>
+        <td th:text="${user.surname}">Robinson</td>
+        <td th:text="${user.password}">Password</td>
+        <td><a href="#" th:href="@{/user/update/}+${user.id}">update</a></td>
+        <td><a href="#" th:href="@{/user/delete/}+${user.id}">delete</a></td>
+    </tr>
+</table>
+
+<div>
+    <ol>
+        <li th:each="user : ${users}">
+            <span th:text="${user.firstname} + ' ' + ${user.surname}"></span>
+            <a href="#" th:href="@{/user/update/}+${user.id}">update</a>
+            <a href="#" th:href="@{/user/delete/}+${user.id}">delete</a>
+
+        </li>
+    </ol>
+</div>
+
 </body>
 </html>
