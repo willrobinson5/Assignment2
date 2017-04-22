@@ -1,5 +1,6 @@
 package com.artistbase2.service;
 
+import com.artistbase2.domain.LoginForm;
 import com.artistbase2.domain.User;
 import com.artistbase2.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +21,12 @@ public class UserService {
     public List<User> findAll() { return userRepository.findAll(); }
 
     public void delete(User user) { userRepository.delete(user);}
+
+    public boolean validateLogin(LoginForm user)
+    {
+        List<User> users = userRepository.checkUserInput(user.getAccountname(), user.getPassword());
+//        List<User> users = userRepository.findByFirstnameAndPassword(user.getAccountname(), user.getPassword());
+
+        return users !=null && users.size()>0;
+    }
 }
