@@ -2,15 +2,17 @@ package com.artistbase2.controller;
 
 import com.artistbase2.domain.LoginForm;
 import com.artistbase2.domain.User;
+import com.artistbase2.domain.UserSearchForm;
 import com.artistbase2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.xml.sax.ext.Attributes2Impl;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by web on 19/04/17.
@@ -56,7 +58,8 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
 //    @ResponseBody
-    public String login(Model model, @Valid @ModelAttribute("user") LoginForm user, BindingResult bindingResult)
+    public String login(Model model, @Valid @ModelAttribute("user") LoginForm user, BindingResult
+            bindingResult, HttpSession session)
     {
         if(bindingResult.hasErrors())
         {
@@ -71,8 +74,35 @@ public class UserController {
             model.addAttribute("message", "Your account name or password is incorrect");
             return "login";
         }
+
+        session.setAttribute("login", true);
         return "redirect:/";
 
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+
+    public String logout(Model model, HttpSession session)
+    {
+        session.removeAttribute("login");
+        return "redirect:/user/login";
+    }
+
+    @RequestMapping(value="/search", method=RequestMethod.GET)
+    public String searchView(Model model)
+    {
+        UserSearchForm searchForm = new UserSearchForm();
+        model.addAttribute("searchCriteria", searchForm);
+        return "search";
+    }
+
+    @RequestMapping(value="/search", method=RequestMethod.POST)
+    public String searchView(Model model, @ModelAttribute("searchCriteria") UserSearchForm searchForm)
+    {
+        List<User> users=userService.searchUsers(searchForm);
+        model.addAttribute("searchCriteria", searchForm);
+        model.addAttribute("users", users);
+        return "search";
     }
     @RequestMapping(value = "/update/{user}", method = RequestMethod.GET)
     public String updateView(Model model, @PathVariable User user)
