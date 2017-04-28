@@ -69,7 +69,7 @@ public class ArtistController {
     public String update(Model model, @ModelAttribute("user") Artist artist)
     {
         artistService.save(artist);
-        return "artist/artistIndex";
+        return "redirect:/artist/artistIndex";
     }
 
     @RequestMapping(value = "/delete/{artist}", method = RequestMethod.GET)
@@ -77,6 +77,6 @@ public class ArtistController {
     public String deleteArtist(@PathVariable Artist artist)
     {
         artistService.delete(artist);
-        return "artist/artistIndex";
+        return "redirect:/artist/artistIndex";
     }
 }
