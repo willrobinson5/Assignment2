@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Demo Project</title>
-    <a href="/user/register">Register</a>
 </head>
 <body>
 
+<div th:include="fragments/header :: header"></div>
+<div class="container">
 <table border="1px">
     <tr>
         <th>First Name</th>
@@ -22,16 +23,6 @@
         <td><a href="#" th:href="@{/user/delete/}+${user.id}">delete</a></td>
     </tr>
 </table>
-
-<div>
-    <ol>
-        <li th:each="user : ${users}">
-            <span th:text="${user.firstname} + ' ' + ${user.surname}"></span>
-            <a href="#" th:href="@{/user/update/}+${user.id}">update</a>
-            <a href="#" th:href="@{/user/delete/}+${user.id}">delete</a>
-
-        </li>
-    </ol>
 </div>
 
 </body>
