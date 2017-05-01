@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="headerinclude">
+    <title>Artist Base</title>
+
+</div>
+
+<style>
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333
+    }
+</style>
+
+<div th:fragment="header">
+<div class="navbar">
+        <a th:href="@{/}">Home</a>
+        <ul>
+            <li><a th:href="@{/user/register}">Register</a></li>
+            <li><a th:href="@{/user/search}">Search Users</a></li>
+            <li><a th:href="@{/artist/addArtist}">Add an Artist</a></li>
+            <li><a th:href="@{/artist/artistIndex}">Show all Artists</a></li>
+        </ul>
+</div>
+</div>
+
+</html>

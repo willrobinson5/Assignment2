@@ -1,14 +1,18 @@
 package com.artistbase2.controller;
 
+import com.artistbase2.domain.Artist;
 import com.artistbase2.domain.User;
+import com.artistbase2.service.ArtistService;
 import com.artistbase2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -19,14 +23,24 @@ public class HomeController {
 
     @Autowired
     UserService userService;
+    ArtistService artistService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Model model)
+    public String index(Model model, HttpSession session)
     {
-
+        if(session.getAttribute("login")==null)
+        {
+            return "redirect:/user/login";
+        }
         List<User> users = userService.findAll();
-
         model.addAttribute("users", users);
         return "index";
+    }
+
+    @RequestMapping(value = "/maps", method = RequestMethod.GET)
+    public String mapsView(Model model)
+    {
+        return "maps";
     }
 }
 
