@@ -4,7 +4,7 @@
     <title>Register Form</title>
 </head>
 <body>
-
+<div th:include="fragments/header :: header"></div>
 <h3>User Update</h3>
 
 <form action="#" th:action="@{/user/update}" th:object="${user}" method="post">
