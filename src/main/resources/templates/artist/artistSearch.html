@@ -7,7 +7,7 @@
 <body>
 <div th:include="fragments/header :: header"></div>
 <h3>Search Artists</h3>
-
+<!--Searches the artists table-->
 <form th:action="@{/artist/artistSearch}" th:object="${searchCriteria}" method="post">
     <p>First Name: <input type="text" th:field="*{artistFirstname}"/></p>
     <p>Surname: <input type="text" th:field="*{artistSurname}"/></p>

@@ -23,20 +23,16 @@ public class UserService {
 
     public void delete(User user) { userRepository.delete(user);}
 
+    //Checks the log in credentials against the users table.
     public boolean validateLogin(LoginForm user)
     {
         List<User> users = userRepository.checkUserInput(user.getAccountname(), user.getPassword());
-//        List<User> users = userRepository.findByFirstnameAndPassword(user.getAccountname(), user.getPassword());
 
         return users !=null && users.size()>0;
     }
 
     public List<User> searchUsers(UserSearchForm user)
     {
-//        if(user.getFirstname().isEmpty() && user.getSurname().isEmpty())
-//        {
-//            return userRepository.findAll();
-//        }
         return userRepository.searchUsers(user.getFirstname(), user.getSurname());
     }
 }

@@ -32,5 +32,4 @@ public class ArtistService {
     public List<Artist> searchArtist(ArtistSearchForm artist) {
         return artistRepository.searchArtists(artist.getArtistFirstname(), artist.getArtistSurname());
     }
-
 }

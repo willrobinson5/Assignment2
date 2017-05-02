@@ -25,9 +25,12 @@ public class HomeController {
     UserService userService;
     ArtistService artistService;
 
+    //Opens the home page
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model, HttpSession session)
     {
+        //If there is no user logged in there will be no user session
+        //so the page won't load.
         if(session.getAttribute("login")==null)
         {
             return "redirect:/user/login";
@@ -37,6 +40,7 @@ public class HomeController {
         return "index";
     }
 
+    //loads the maps view which shows the google maps api.
     @RequestMapping(value = "/maps", method = RequestMethod.GET)
     public String mapsView(Model model)
     {

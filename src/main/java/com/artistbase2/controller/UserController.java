@@ -25,6 +25,7 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
 
+    //Loads the view for user registration.
     public String registerView(Model model)
     {
         User user = new User();
@@ -32,16 +33,18 @@ public class UserController {
         return "user/register";
     }
 
+    //Adds the user into the user table.
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-//    @ResponseBody
     public String register(Model model, @Valid @ModelAttribute("user") User user, BindingResult bindingResult)
     {
+        //Validation on the fields so if they are empty, output message.
         if(bindingResult.hasErrors())
         {
             model.addAttribute("user", user);
             model.addAttribute("message", "Please enter info in all fields");
             return "user/register";
         }
+        //Saves the user into the table.
         userService.save(user);
         return "redirect:/";
         //return "the user" + user.getFirstname();
@@ -56,8 +59,8 @@ public class UserController {
         return "user/login";
     }
 
+    //logs the user into the home page if the details match the users table.
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    @ResponseBody
     public String login(Model model, @Valid @ModelAttribute("user") LoginForm user, BindingResult
             bindingResult, HttpSession session)
     {
@@ -74,20 +77,19 @@ public class UserController {
             model.addAttribute("message", "Your account name or password is incorrect");
             return "user/login";
         }
-
         session.setAttribute("login", true);
         return "redirect:/";
-
     }
 
+    //logs the user out.
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-
     public String logout(Model model, HttpSession session)
     {
         session.removeAttribute("login");
         return "redirect:/user/login";
     }
 
+    //opens the search form
     @RequestMapping(value="/search", method=RequestMethod.GET)
     public String searchView(Model model)
     {
@@ -96,6 +98,7 @@ public class UserController {
         return "user/search";
     }
 
+    //Searches the artists table for the letters inputted.
     @RequestMapping(value="/search", method=RequestMethod.POST)
     public String searchView(Model model, @ModelAttribute("searchCriteria") UserSearchForm searchForm)
     {
@@ -104,6 +107,8 @@ public class UserController {
         model.addAttribute("users", users);
         return "user/search";
     }
+
+    //Loads the users update form
     @RequestMapping(value = "/update/{user}", method = RequestMethod.GET)
     public String updateView(Model model, @PathVariable User user)
     {
@@ -111,6 +116,7 @@ public class UserController {
         return "user/update";
     }
 
+    //Updates the user of the user that was clicked on.
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(Model model, @ModelAttribute("user") User user)
     {
@@ -118,13 +124,12 @@ public class UserController {
         return "redirect:/";
     }
 
+    //deletes the artist that was clicked.
     @RequestMapping(value = "/delete/{user}", method = RequestMethod.GET)
-//    @ResponseBody
     public String delete(@PathVariable User user)
     {
         String name = user.getFirstname() + " " + user.getSurname();
         userService.delete(user);
-
         return "redirect:/";
     }
 }

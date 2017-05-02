@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:include="fragments/header :: header"></div>
-
+<!--Form to add a song to the artist-->
 <form action="#" th:action="@{/song/addsong}" th:object="${song}" method="post">
     <input type="hidden" th:field="*{id}"/>
     <input type="hidden" th:field="*{artist.id}"/>

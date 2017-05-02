@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <th:block th:include="fragments/loginHeader :: headerinclude"></th:block>
     <title>Register Form</title>
 </head>
 <body>
-<div th:include="fragments/header :: header"></div>
+<div th:include="fragments/loginHeader :: loginHeader"></div>
 <h3>User Registration</h3>
 
 <form action="#" th:action="@{/user/register}" th:object="${user}" method="post">
