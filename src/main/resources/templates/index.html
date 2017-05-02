@@ -1,28 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Demo Project</title>
+    <th:block th:include="fragments/header :: headerinclude"></th:block>
 </head>
 <body>
 
 <div th:include="fragments/header :: header"></div>
 <div class="container">
-<table border="1px">
-    <tr>
-        <th>First Name</th>
-        <th>Surname</th>
-        <th>Password</th>
-        <th>Update</th>
-        <th>Delete</th>
-    </tr>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.firstname}">Will</td>
-        <td th:text="${user.surname}">Robinson</td>
-        <td th:text="${user.password}">Password</td>
-        <td><a href="#" th:href="@{/user/update/}+${user.id}">update</a></td>
-        <td><a href="#" th:href="@{/user/delete/}+${user.id}">delete</a></td>
-    </tr>
-</table>
+    <h3>Hello, welcome to Artist Base</h3>
 </div>
 
 </body>

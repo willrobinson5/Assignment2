@@ -1,6 +1,8 @@
 package com.artistbase2.controller;
 
 import com.artistbase2.domain.Artist;
+
+import com.artistbase2.domain.ArtistSearchForm;
 import com.artistbase2.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +37,7 @@ public class ArtistController {
         return "artist/addArtist";
     }
 
+
     @RequestMapping(value = "/addArtist", method = RequestMethod.POST)
 //    @ResponseBody
     public String addArtist(Model model, @Valid @ModelAttribute("artist") Artist artist, BindingResult bindingResult)
@@ -49,6 +52,22 @@ public class ArtistController {
         return "artist/artistIndex";
     }
 
+    @RequestMapping(value="/artistSearch", method=RequestMethod.GET)
+    public String searchView(Model model)
+    {
+        ArtistSearchForm searchForm = new ArtistSearchForm();
+        model.addAttribute("searchCriteria", searchForm);
+        return "artist/artistSearch";
+    }
+    //
+    @RequestMapping(value="/artistSearch", method=RequestMethod.POST)
+    public String searchView(Model model, @ModelAttribute("searchCriteria") ArtistSearchForm searchForm)
+    {
+        List<Artist> artists=artistService.searchArtist(searchForm);
+        model.addAttribute("searchCriteria", searchForm);
+        model.addAttribute("artists", artists);
+        return "artist/artistSearch";
+    }
 
     @RequestMapping(value = "/artistIndex", method = RequestMethod.GET)
     public String artistIndex(Model model, HttpSession session)
@@ -79,4 +98,12 @@ public class ArtistController {
         artistService.delete(artist);
         return "redirect:/artist/artistIndex";
     }
+
+    @RequestMapping(value = "/artistInfo/{artist}", method = RequestMethod.GET)
+    public String artistInfoView(Model model, @PathVariable Artist artist)
+    {
+        model.addAttribute("artist", artist);
+        return "artist/artistInfo";
+    }
+
 }

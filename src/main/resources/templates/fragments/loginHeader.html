@@ -264,16 +264,14 @@
 
 </div>
 
-<div th:fragment="header">
+
+<div th:fragment="loginHeader">
 
     <div class="navbar">
         <ul>
-            <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/artist/addArtist}">Add an Artist</a></li>
-            <li><a th:href="@{/artist/artistSearch}">Search an Artist</a></li>
-            <li><a th:href="@{/user/logout}">Logout</a></li>
+            <li><a th:href="@{/user/login}">Login</a></li>
+            <li><a th:href="@{/user/register}">Register</a></li>
         </ul>
     </div>
 </div>
-
 </html>

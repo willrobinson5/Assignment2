@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/header :: headerinclude"></th:block>
+    <title>Add a Song</title>
+</head>
+<body>
+<div th:include="fragments/header :: header"></div>
+
+<form action="#" th:action="@{/song/addsong}" th:object="${song}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:field="*{artist.id}"/>
+    <p>Song Title: </p> <input type="text" th:field="*{songTitle}"/>
+    <p>Length: </p> <input type="text" th:field="*{songLength}"/>
+
+
+    <input type="submit" value="Add Song"/>
+
+
+
+</form>
+
+<div th:if="${message!=NULL}">
+    <span th:text="${message}"/>
+</div>
+
+</body>
+</html>

@@ -12,14 +12,22 @@
     <ol>
         <li th:each="artist : ${artist}">
             <p th:text="${artist.artistFirstname}+' '+${artist.artistSurname}"></p>
-            <p th:text="${artist.artistInfo}"></p>
+            <p th:text="${artist.artistInfo}" class="container"></p>
             <p th:text="${artist.artistDOB}" class="DOB"></p>
         </li>
     </ol>
 </div>
 
-<form th:action="@{/artist/artistSearch}" th:object="${searchCriteria}" method="post">
-    <input type="submit" value="Search"/>
+<div>
+    <ol>
+        <li th:each="songs : ${artist.songs}">
+            <p th:text="${songs.songTitle}+' '+${songs.songLength}"></p>
+        </li>
+    </ol>
+</div>
+
+<form th:action="@{/song/addsong/}+${artist.id}" method="get">
+    <input type="submit" value="Add Song"/>
 </form>
 
 
