@@ -18,6 +18,14 @@
     </ol>
 </div>
 
+<form th:action="@{/artist/artistUpdate/}+${artist.id}" method="get">
+    <input type="submit" value="Update Artist"/>
+</form>
+
+<form th:action="@{/artist/deleteArtist/}+${artist.id}" method="get">
+    <input type="submit" value="Delete Artist" onclick="return confirm('Are you sure you want to delete this artist?')"/>
+</form>
+
 <div>
     <ol>
         <li th:each="songs : ${artist.songs}">

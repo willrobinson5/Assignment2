@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpSession;
@@ -25,7 +22,6 @@ import java.util.List;
 @RequestMapping(value="/artist")
 public class ArtistController {
     @Autowired
-
     ArtistService artistService;
 
     @RequestMapping(value = "/addArtist", method = RequestMethod.GET)
@@ -49,7 +45,7 @@ public class ArtistController {
             return "artist/addArtist";
         }
         artistService.save(artist);
-        return "artist/artistIndex";
+        return "redirect:/";
     }
 
     @RequestMapping(value="/artistSearch", method=RequestMethod.GET)
@@ -88,15 +84,15 @@ public class ArtistController {
     public String update(Model model, @ModelAttribute("user") Artist artist)
     {
         artistService.save(artist);
-        return "redirect:/artist/artistIndex";
+        return "redirect:/";
     }
 
-    @RequestMapping(value = "/delete/{artist}", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteArtist/{artist}", method = RequestMethod.GET)
 //    @ResponseBody
     public String deleteArtist(@PathVariable Artist artist)
     {
         artistService.delete(artist);
-        return "redirect:/artist/artistIndex";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/artistInfo/{artist}", method = RequestMethod.GET)
