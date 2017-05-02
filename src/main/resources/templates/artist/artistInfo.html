@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/header :: headerinclude"></th:block>
+    <title>Info for</title>
+</head>
+<body>
+<div th:include="fragments/header :: header"></div>
+<h3>Info for</h3>
+
+<div>
+    <ol>
+        <li th:each="artist : ${artist}">
+            <p th:text="${artist.artistFirstname}+' '+${artist.artistSurname}"></p>
+            <p th:text="${artist.artistInfo}"></p>
+            <p th:text="${artist.artistDOB}" class="DOB"></p>
+        </li>
+    </ol>
+</div>
+
+<form th:action="@{/artist/artistSearch}" th:object="${searchCriteria}" method="post">
+    <input type="submit" value="Search"/>
+</form>
+
+
+</body>
+</html>
